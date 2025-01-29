@@ -1,0 +1,43 @@
+Journal Program
+
+Things
+- Program
+    - Journal
+    - Promptman
+    - Menu
+    - main
+        - quit
+
+- Journal
+    - entrylist <list> entry
+    - Load <file name> str (void)
+    - Save <file name> str (void)
+    - addentry(entry)
+    - change bool
+
+- Promptman
+    - prompts <list> str
+    - get random prompt str
+
+- Menu
+    -Display void
+
+- Entry
+    - date str
+    - prompt str
+    - text str
+    
+
+Actions
+- Generate Random Prompt
+- Display Menu
+    - Write
+        - Generate Prompt
+        - get current date
+        - prompt the user
+        - create Entry
+        - add to entry list
+    - Display
+    - load
+    - save
+    - quit

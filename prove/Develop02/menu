@@ -1,0 +1,9 @@
+using System;
+
+class Menu
+{
+    public void display()
+    {
+        // display function void
+    }
+}
