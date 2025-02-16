@@ -1,29 +1,85 @@
 using System;
-using System.Net;
+using System.IO;
 using System.Linq;
+using System.Collections.Generic;
+using Microsoft.VisualBasic.FileIO;
 
 class Program
 {
-    // public bool IsFinished()
-    // {
-        
-    // }
-    // public void HideWords()
-    // {
-
-    // }
     static void Main(string[] args)
     {
-        
-        // public List<string> s = new List<string>();
+
         string filePath = @"C:\Users\trifo\Documents\GitHub\CSE210\prove\Develop03\lds-scriptures.csv";
-        string[] lines = File.ReadLines(filePath).ToArray();
-        foreach (string line in lines)
+
+
+        var scriptureData = new List<ScriptureData>();
+
+        using (var parser = new TextFieldParser(filePath))
         {
-            string[] values = line.Split(",");
-            Console.WriteLine(string.Join(" ", values));
+            parser.TextFieldType = FieldType.Delimited;
+            parser.SetDelimiters(",");
+            parser.HasFieldsEnclosedInQuotes = true;
+            parser.ReadLine(); 
+
+            while (!parser.EndOfData)
+            {
+
+                string[] fields = parser.ReadFields();
+                scriptureData.Add(new ScriptureData(
+                    fields[4],
+                    fields[5],
+                    fields[14],
+                    fields[15],
+                    fields[16]
+                ));
+            }
         }
 
+        var scriptures = new Scripture(scriptureData);
 
+
+        System.Console.WriteLine("Enter a scripture reference (ex. Genesis 1:1) ");
+        string reference = Console.ReadLine().ToLower();
+
+        if (!string.IsNullOrEmpty(reference))
+        {
+            var scripture = scriptures.SearchByReference(reference);
+            if (scripture != null)
+            {
+                var referenceText = $"{scripture.BookTitle} {scripture.ChapterNumber}:{scripture.VerseNumber}";
+                scriptures.AddVerse(scripture.ScriptureText, referenceText);
+            }
+            else
+            {
+                Console.WriteLine("Scripture reference not found. Adding a random scripture instead.");
+                var random = new Random();
+                var randomScripture = scriptureData[random.Next(scriptureData.Count)];
+                var randomReferenceText = $"{randomScripture.BookTitle} {randomScripture.ChapterNumber}:{randomScripture.VerseNumber}";
+                scriptures.AddVerse(randomScripture.ScriptureText, randomReferenceText);
+            }
+        }
+        else
+        {
+            var random = new Random();
+            var randomScripture = scriptureData[random.Next(scriptureData.Count)];
+            var randomReferenceText = $"{randomScripture.BookTitle} {randomScripture.ChapterNumber}:{randomScripture.VerseNumber}";
+            scriptures.AddVerse(randomScripture.ScriptureText, randomReferenceText);
+        }
+
+        while (!scriptures.IsFinished())
+        {
+            Console.Clear();
+            scriptures.DisplayScripture();
+            Console.WriteLine("Press enter to hide words: ");
+            Console.ReadLine();
+            scriptures.HideWords();
+            if (scriptures.IsFinished())
+            {
+                break;
+            }
+        }
+        Console.Clear();
+        scriptures.DisplayScripture();
+        Console.WriteLine("Have you memorized it yet? keep trying if you didn't quite get it.");
     }
 }
