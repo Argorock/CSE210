@@ -20,12 +20,18 @@ item
 */
 
 using System;
+using System.ComponentModel.DataAnnotations;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Sandbox World!");
+        // Console.WriteLine("Hello Sandbox World!");
+
+    Savings savings1 = new Savings();
+    Savings savings2 = new Savings("fred");
+
+    
 
     }
 }
