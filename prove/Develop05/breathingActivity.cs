@@ -1,9 +1,7 @@
 class BreathingActivity : Activity
 {
-public void Breathing() : base()
+public BreathingActivity() : base("Breathing", "Breathing Activity", 30)
 {
-    // _name = "Breathing";
-    // _description = "Breathing activity";
 }
 
 public void Doactivity()
@@ -11,6 +9,7 @@ public void Doactivity()
     DisplayIntro();
     PromptDuration();
     ShowGetReady();
-    ShowCountDown(_duration);
-    ShowAnimation(_duration);
+    // ShowCountDown(_duration);
+    // ShowAnimation(_duration);
+}
 }

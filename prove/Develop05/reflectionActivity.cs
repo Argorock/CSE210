@@ -7,6 +7,7 @@ public void Doactivity()
     DisplayIntro();
     PromptDuration();
     ShowGetReady();
-    ShowCountDown(_duration);
-    ShowAnimation(_duration);
+    // ShowCountDown(_duration);
+    // ShowAnimation(_duration);
+}
 }
