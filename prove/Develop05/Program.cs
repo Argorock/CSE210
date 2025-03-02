@@ -5,73 +5,66 @@ class Program
 {
     static void Main(string[] args)
     {
-        
-        Console.WriteLine("1. Breathing Activity");
-        Console.WriteLine("2. Reflection Activity");
-        Console.WriteLine("3. Listing Activity");
-        Console.WriteLine("4. Unkown Activity");
-        Console.WriteLine("5. Exit");
-
-        Console.Write("Enter the number of the activity you would like to do: ");
-        //chooseActivity = Console.ReadLine();
-
-
-        switch //chooseActivity = Convert.ToInt32()
-        (Console.ReadLine())
+        while (true)
         {
-            case "1":
-            Console.Clear();
-                new BreathingActivity().Doactivity();
-                break;
-            case "2":
-            Console.Clear();
+        
+            Console.WriteLine("1. Breathing Activity");
+            Console.WriteLine("2. Reflection Activity");
+            Console.WriteLine("3. Listing Activity");
+            Console.WriteLine("4. Unkown Activity");
+            Console.WriteLine("5. Exit");
 
-                new ReflectionActivity().Doactivity();
-                break;
-            case "3":
-            Console.Clear();
+            Console.Write("Enter the number of the activity you would like to do: ");
+            //chooseActivity = Console.ReadLine();
 
-                new ListingActivity().Doactivity();
-                break;
-            case "4":
-            Console.Clear();
 
-                // new Activity().Doactivity();
+            switch //chooseActivity = Convert.ToInt32()
+            (Console.ReadLine())
+            {
+                case "1":
+                Console.Clear();
+                    new BreathingActivity().Doactivity();
+                    Console.Clear();
+                    break;
+                case "2":
+                Console.Clear();
+                    new ReflectionActivity().Doactivity();
+                    Console.Clear();
+                    break;
+                case "3":
+                Console.Clear();
+                    new ListingActivity().Doactivity();
+                    Console.Clear();
+                    break;
+                case "4":
+                Console.Clear();
+                    new GratitudeActivity().Doactivity();
+                    Console.Clear();
+                    break;
+                case "5":
+                Console.Clear();
+                    Environment.Exit(0);
+                    break;
+                default:
+                Console.Clear();
+                    Console.WriteLine("Invalid input");
+                    break;
+            }
+            System.Console.WriteLine("Would you like to do another activity? (y/n)");
+            string answer = Console.ReadLine();
+            if (answer == "n")
+            {
                 break;
-            case "5":
-            Console.Clear();
-
-                Environment.Exit(0);
-                break;
-            default:
-            Console.Clear();
-
+            }
+            else if (answer == "y")
+            {
+                continue;
+            }
+            else
+            {
                 Console.WriteLine("Invalid input");
                 break;
-        }
-        
-        // new Activity().ShowAnimation();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            }
+        }       
     }
-
-
 }

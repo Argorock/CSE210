@@ -30,7 +30,7 @@ class Activity
 
     public void PromptDuration()
     {
-        System.Console.WriteLine();
+        System.Console.WriteLine("");
         Console.Write("Please enter the duration of the activity in seconds: ");
         _duration = Convert.ToInt32(Console.ReadLine());
         
@@ -48,9 +48,9 @@ class Activity
         for (int i = seconds; i > 0; i--)
         {
             Console.Write($"\r The Activity will start in {i} seconds ");
-            Console.WriteLine();
             System.Threading.Thread.Sleep(1000);
         }
+        Console.WriteLine("");
         return "Go!";
     }
 

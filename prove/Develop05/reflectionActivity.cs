@@ -62,7 +62,7 @@ public void Doactivity()
         for (int i = 1; i < 11; i++)
         {
             Console.Write(".");
-            if (i % 3 == 0)
+            if (i % 4 == 0)
             {
                 Console.Write("\r    \r");
             }

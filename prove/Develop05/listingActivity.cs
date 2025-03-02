@@ -18,7 +18,7 @@ class ListingActivity : Activity
         _items = new List<string>();
     }
 
-    public void Doactivity() // : base()
+    public void Doactivity()
     {
     DisplayIntro();
     PromptDuration();
@@ -30,13 +30,19 @@ class ListingActivity : Activity
 
     DateTime start = DateTime.Now;
     DateTime end = start.AddSeconds(_duration + 5);
-    while (DateTime.Now < end);
+    while (DateTime.Now < end)
     {
-        while (DateTime.Now < end)
-        {
-            string item = System.Console.ReadLine();
-            _items.Add(item);
-        }
+        string item = Console.ReadLine();
+        _items.Add(item);
+        
     }
+    System.Console.WriteLine("");
+    System.Console.WriteLine("Listing Activity Complete!");
+    System.Console.WriteLine("Here are the items you listed:");
+    System.Console.WriteLine("");
+    foreach (string item in _items)
+    {
+        System.Console.WriteLine(item);
     }
+}
 }
