@@ -2,7 +2,7 @@ using System.Security.Cryptography.X509Certificates;
 
 class Activity
 {
-    private int _duration;
+    protected int _duration;
     private string _name;
     private string _description;
 
@@ -30,6 +30,7 @@ class Activity
 
     public void PromptDuration()
     {
+        System.Console.WriteLine();
         Console.Write("Please enter the duration of the activity in seconds: ");
         _duration = Convert.ToInt32(Console.ReadLine());
         
@@ -39,7 +40,6 @@ class Activity
     public void ShowGetReady()
     {
         Console.WriteLine("Get ready to start the activity!");
-        Console.WriteLine("The Activity will start in 5 seconds");
         ShowCountDown(5);
     }
 
@@ -47,7 +47,8 @@ class Activity
     {
         for (int i = seconds; i > 0; i--)
         {
-            Console.Write($"{i} \r");
+            Console.Write($"\r The Activity will start in {i} seconds ");
+            Console.WriteLine();
             System.Threading.Thread.Sleep(1000);
         }
         return "Go!";
@@ -59,7 +60,7 @@ class Activity
 
     public void ShowAnimation()
     {
-        Console.Clear();
+   
         for (int i = 5; i > 0; i--)
         {
             Console.SetCursorPosition(0, 0);
