@@ -4,10 +4,18 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.Write("What is your first name? ");
-        string FirstName = Console.ReadLine();
-        Console.Write("What is your last name? ");
-        string LastName = Console.ReadLine();
-        Console.WriteLine($"Your name is {LastName}, {FirstName} {LastName}. ");
+
+        var people = new List<Employee>();
+
+        people.Add(new Faculty(name: "Marry"));
+        people.Add(new TA(name: "John"));   
+        people.Add(new Student(name: "Jane"));
+        people.Add(new Faculty(name: "Tom"));
+       
+        foreach (var person in people)
+        {
+            person.display();
+            Console.WriteLine("Payday: " + person.SetPayDay());
+        }
     }
 }

@@ -4,6 +4,9 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Prep3 World!");
+        Shapes square = new Shapes();
+        square.SetColor("red");
+        Console.WriteLine(square.GetColor());
+        Console.WriteLine(square.GetArea());
     }
 }
