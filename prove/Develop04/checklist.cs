@@ -1,64 +1,59 @@
-class Checklist : Goal
+class ChecklistGoal : Goal
 {
     private int _completed;
     private int _totalToComplete;
     private int _bonusPoints;
 
-    public Checklist(string name, string description, int points) : base(name, description, points)
+    public ChecklistGoal(string name, string description, int points, int totalToComplete, int bonusPoints) : base(name, description, points)
     {
         _completed = 0;
-        _totalToComplete = 0;
-        _bonusPoints = 0;
+        _totalToComplete = totalToComplete;
+        _bonusPoints = bonusPoints;
     }
-    public void Display()
-    {
-        // should display the goal
-        return $"{_name}: {_description} -Points: {_points} - Completed: {_completed}/{_totalToComplete} - Bonus Points: {_bonusPoints}";
-    }
-    public string GetRep()
-    {
-        // should get the value of what the goal is
-        return $"{_name}:{_description}:{_points}:{_completed}:{_totalToComplete}:{_bonusPoints}";
-    }
-    public string SetRep()
-    {
-        // should set the value of what the goal is
 
-    }  
-    public void IsComplete()
+    public override bool IsComplete()
     {
-        // should return if the goal is complete
-        while (_completed < _totalToComplete)
-        {
-            _completed += 1;
+        return _completed >= _totalToComplete;
+    }
 
-        }
-        if (_completed == _totalToComplete)
-            return true;
-    }
-    public void SetComplete()
+    public override void SetComplete()
     {
-        // should set the goal to complete
-        
+        _completed++;
     }
-    public void GetGoalPoints()
+
+    public override int GetGoalPoints()
     {
-        // depends on the type of goal and what the user says its worth
-        return _points;
-        if (_completed == _totalToComplete)
+        if (IsComplete())
         {
             return _points + _bonusPoints;
-
         }
+        return _points;
     }
 
-//     CG(n, d, pt, fpt)
-//     {
-//         _name = n;
-//         _description = d;
-//         _points = pt;
-//         _totalToComplete = 0;
-//         _finishPoint = fpt;
-//     }
-//     cg(string)
+    public override string Display()
+    {
+        return $"{_name}: {_description} - Points: {_points} - Completed: {_completed}/{_totalToComplete} - Bonus Points: {_bonusPoints}";
+    }
+
+    public override string GetRep()
+    {
+        return $"ChecklistGoal|{_name}:{_description}:{_points}:{_completed}:{_totalToComplete}:{_bonusPoints}";
+    }
+
+    public override void SetRep(int rep)
+    {
+        // Not applicable for ChecklistGoal
+    }
+
+    public void SetRep(string rep)
+    {
+        // should turn all the data of the goal into a single string
+        string[] parts = rep.Split(':');
+        _name = parts[0];
+        _description = parts[1];
+        _points = int.Parse(parts[2]);
+        _completed = int.Parse(parts[3]);
+        _totalToComplete = int.Parse(parts[4]);
+        _bonusPoints = int.Parse(parts[5]);
+    }
 }

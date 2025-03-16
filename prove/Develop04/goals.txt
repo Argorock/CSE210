@@ -1,0 +1,1 @@
+SimpleGoal|die:well, die of course:100:False|die: well, die of course - Points: 100 - Complete: False

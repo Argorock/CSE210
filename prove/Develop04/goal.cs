@@ -1,41 +1,37 @@
 abstract class Goal
 {
-    private string _name;
-    private string _description;
+    protected string _name;
+    protected string _description;
     protected int _points;
 
-public Goal(string name, string description, int points)
-{
-    _name = name;
-    _description = description;
-    _points = points;
-}
+    public Goal(string name, string description, int points)
+    {
+        _name = name;
+        _description = description;
+        _points = points;
+    }
 
+    // Should return if the goal is complete
     public virtual bool IsComplete()
     {
         return false;
     }
-        // should return if the goal is complete, abstract function
-    public abstract void SetComplete();
-        // should set the goal to complete, abstract function
 
-    public virtual void GetGoalPoints()
+    // Should set the goal to complete
+    public abstract void SetComplete();
+
+    // Should return the points for the goal
+    public virtual int GetGoalPoints()
     {
-        // depends on the type of goal and what the user says its worth, virtual function
         return _points;
     }
 
+    // Should get the representation of the goal
     public abstract string GetRep();
-    
-        // Should get the value of what the goal is, abstract function
-    
 
+    // Should set the value of what the goal is
     public abstract void SetRep(int rep);
-        // Should set the value of what the goal is, abstract function
- 
 
-    public abstract void Display()
-    {
-        // Should display the goal, abtract function
-    }
+    // Should display the goal
+    public abstract string Display();
 }
