@@ -10,7 +10,7 @@ class Journal
     // add entry
     // change bool
     // call entry    
-        public Journal journal = new Journal();
+        // public Journal journal = new Journal();
         
         List<Entry> entries = new List<Entry>();
 
