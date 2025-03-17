@@ -9,7 +9,11 @@ class Program
     static void Main(string[] args)
     {
 
-        string filePath = @"C:\Users\trifo\Documents\GitHub\CSE210\prove\Develop03\lds-scriptures.csv";
+        string filePath = Path.Combine("CSE210", "prove", "Develop03", "data", "lds-scriptures.csv");
+
+        // Print the file path to verify it
+        Console.WriteLine("File path: " + filePath);
+
 
 
         var scriptureData = new List<ScriptureData>();
