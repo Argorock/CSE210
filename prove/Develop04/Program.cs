@@ -146,7 +146,7 @@ class Program
 
     static void SaveGoals()
     {
-        using (StreamWriter writer = new StreamWriter("C:\\Users\\trifo\\Documents\\GitHub\\CSE210\\prove\\Develop04\\goals.txt"))
+        using (StreamWriter writer = new StreamWriter("goals.txt"))
         {
             foreach (var goal in goals)
             {
@@ -159,7 +159,7 @@ class Program
     static void LoadGoals()
 {
     goals.Clear();
-    using (StreamReader reader = new StreamReader("C:\\Users\\trifo\\Documents\\GitHub\\CSE210\\prove\\Develop04\\goals.txt"))
+    using (StreamReader reader = new StreamReader("goals.txt"))
     {
         string line;
         while ((line = reader.ReadLine()) != null)
