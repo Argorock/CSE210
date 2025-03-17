@@ -9,10 +9,15 @@ class Program
     static void Main(string[] args)
     {
 
-        string filePath = Path.Combine("CSE210", "prove", "Develop03", "data", "lds-scriptures.csv");
+        string baseDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
+        Console.WriteLine("Base Directory: " + baseDirectory);
+
+        // Construct the file path using the project directory
+        string filePath = Path.Combine(baseDirectory, "Develop03", "lds-scriptures.csv");
 
         // Print the file path to verify it
         Console.WriteLine("File path: " + filePath);
+
 
 
 
