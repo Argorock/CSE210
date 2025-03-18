@@ -6,8 +6,8 @@ using Microsoft.VisualBasic.FileIO;
 
 class Program
 {
-    static string baseDirectory = Directory.GetCurrentDirectory();
-    static string filePath = Path.Combine(baseDirectory, "CSE210", "prove", "Develop04", "goals.txt");
+    static string baseDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
+    static string filePath = Path.Combine(baseDirectory, "Develop04", "goals.txt");
 
     
     static List<Goal> goals = new List<Goal>();
@@ -152,7 +152,7 @@ class Program
 
     static void SaveGoals()
     {
-        using (StreamWriter writer = new StreamWriter(filePath))
+        using (StreamWriter writer = new StreamWriter(filePath, true))
         {
             foreach (var goal in goals)
             {
