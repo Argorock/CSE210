@@ -1,9 +1,15 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Collections.Generic;
+using Microsoft.VisualBasic.FileIO;
 
 class Program
 {
+    static string baseDirectory = Directory.GetCurrentDirectory();
+    static string filePath = Path.Combine(baseDirectory, "CSE210", "prove", "Develop04", "goals.txt");
+
+    
     static List<Goal> goals = new List<Goal>();
 
     static void Main(string[] args)
@@ -146,7 +152,7 @@ class Program
 
     static void SaveGoals()
     {
-        using (StreamWriter writer = new StreamWriter("goals.txt"))
+        using (StreamWriter writer = new StreamWriter(filePath))
         {
             foreach (var goal in goals)
             {
@@ -159,7 +165,7 @@ class Program
     static void LoadGoals()
 {
     goals.Clear();
-    using (StreamReader reader = new StreamReader("goals.txt"))
+    using (StreamReader reader = new StreamReader(filePath))
     {
         string line;
         while ((line = reader.ReadLine()) != null)
