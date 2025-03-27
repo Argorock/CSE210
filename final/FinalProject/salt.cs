@@ -47,39 +47,12 @@ class Salt
     }
     public void AddSalt(string _plainText)
     {
-        string salt = CreateSalt(_plainText);
-        string salt2 = CreateSalt(_plainText);
-        string salt3 = CreateSalt(_plainText);
-        string firstHalf = _plainText.Substring(0, _plainText.Length / 2);
-        string secondHalf = _plainText.Substring(1, _plainText.Length / 2);
-        Random random = new Random();
-        int rand_number = random.Next(1, 6);
-        if (rand_number == 1)
-            _saltedPassword = $"{salt},{firstHalf},{salt2},{secondHalf},{salt3},1";
-        else if (rand_number == 2)
-            _saltedPassword = $"{salt},{secondHalf},{salt2},{firstHalf},{salt3},2";
-        else if (rand_number == 3)
-            _saltedPassword = $"{salt3},{salt2},{firstHalf},{salt},{secondHalf},3";
-        else if (rand_number == 4)
-            _saltedPassword = $"{secondHalf},{salt2},{salt3},{salt},{firstHalf},4";
-        else
-            _saltedPassword = $"{firstHalf},{salt},{salt2},{secondHalf},{salt3},5";
+  
     }
 
     public void RemoveSalt(string saltedPassword)
     {
-        string[] desaltedPassword = saltedPassword.Trim().Split(",");
-        string saltKey = desaltedPassword[desaltedPassword.Length - 1];
-        if (saltKey == "1")
-            _saltedPassword = $"{desaltedPassword[1]}{desaltedPassword[3]}";
-        else if (saltKey == "2")
-            _saltedPassword = $"{desaltedPassword[3]}{desaltedPassword[1]}";
-        else if (saltKey == "3")
-            _saltedPassword = $"{desaltedPassword[2]}{desaltedPassword[4]}";
-        else if (saltKey == "4")
-            _saltedPassword = $"{desaltedPassword[4]}{desaltedPassword[0]}";
-        else
-            _saltedPassword = $"{desaltedPassword[0]}{desaltedPassword[3]}";
+
     }
 }
 
