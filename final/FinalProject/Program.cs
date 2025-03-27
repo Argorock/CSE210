@@ -4,16 +4,22 @@ class Program
 {
     static void Main(string[] args)
     {
-        Password password = new Password("password", "", "metaData", 0);
+        Password password = new Password("password", "", "metaData");
 
-        // Call the Encrypt method with a salted password
-        string saltedPassword = "password123!"; // Example salted password
-        string encryptedPassword = password.Encrypt(saltedPassword);
-        string decryptedPassword = password.Decrypt(encryptedPassword);
+        Salt salt = new Salt("", 3);
+        string plainText = "password123";
+        int interval = 3;
 
-        // Display the encrypted password
+        salt.AddSalt(plainText, interval);
+
+        string saltedPassword = salt.AddSalt(plainText, interval);
+        string dealtedPassword = salt.RemoveSalt(saltedPassword, interval);
+
+        Console.WriteLine("Plain Text: " + plainText);
         Console.WriteLine("Salted Password: " + saltedPassword);
-        Console.WriteLine("Encrypted Password: " + encryptedPassword);
-        Console.WriteLine("Decrypted Password: " + decryptedPassword);
+        System.Console.WriteLine("Desalted Password: " + dealtedPassword);
+
+    
+
     }
 }

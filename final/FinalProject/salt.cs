@@ -12,19 +12,36 @@ class Salt
             '-', '.', '/', ':', ';', '<', '=', '>', '?', '@',
             '[', ']', '_', '{', '|', '}', '~'];
     protected string _saltedPassword;
+    protected int _interval;
 
-    public Salt(string saltedPassword)
+    public Salt(string saltedPassword, int interval)
     {
         _saltedPassword = saltedPassword;
+        _interval = interval;
+    }
+
+        public int RandomInterval()
+    {
+        Random random = new Random();
+        int interval = random.Next(1, 10); // Random interval between 1 and 10
+        return interval;
+    }
+
+    public int GetInterval()
+    {
+        return _interval;
+    }
+    public void SetInterval(int interval)
+    {
+        _interval = interval;
     }
 
 
     public string CreateSalt(string _plainText)
     {
-        int numberOfCharacters = _plainText.Length / 2;
         string salt = "";
         Random random = new Random();
-        while (numberOfCharacters != 0)
+        for (int i= 0; i < 4; i++)
         {
             int characterPicker = random.Next(1, 11);
             char character;
@@ -41,18 +58,51 @@ class Salt
                 character = specialCharacters[random.Next(specialCharacters.Count)];
             }
             salt = character + salt;
-            numberOfCharacters -= 1;
         }
         return salt;
     }
-    public void AddSalt(string _plainText)
+    public string AddSalt(string plainText, int interval)
     {
-  
+        string saltedPassword = "";
+        int currentIndex = 0;
+
+        while (currentIndex < plainText.Length)
+        {
+            int chunkLength = Math.Min(interval, plainText.Length - currentIndex);
+            string chunk = plainText.Substring(currentIndex, chunkLength);
+
+            saltedPassword += chunk;
+
+            if (currentIndex + chunkLength < plainText.Length) 
+            {
+                saltedPassword += CreateSalt(plainText);
+            }
+
+
+            currentIndex += chunkLength;
+        }
+
+        return saltedPassword;
+    
     }
 
-    public void RemoveSalt(string saltedPassword)
+    public string RemoveSalt(string saltedPassword, int interval)
     {
+            string desaltedPassword = "";
+        int currentIndex = 0;
 
+        while (currentIndex < saltedPassword.Length)
+        {
+            // Extract a chunk of the plain text
+            int chunkLength = Math.Min(interval, saltedPassword.Length - currentIndex);
+            string chunk = saltedPassword.Substring(currentIndex, chunkLength);
+            desaltedPassword += chunk;
+
+            // Move past the chunk and the salt (4 characters of salt)
+            currentIndex += chunkLength + 4; // 4 is the length of the salt
+        }
+
+        return desaltedPassword;
     }
 }
 

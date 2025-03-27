@@ -1,7 +1,15 @@
 class MetaData
 {
-    private int interval;
-    private string salt;
+    // protected int _interval;
+    // // private string _salt;
+
+    // public MetaData(int interval)
+    // {
+    //     _interval = interval;
+   
+    // }
+
+
 
     public void SaveData()
     {
@@ -9,6 +17,6 @@ class MetaData
     }
     public void GetData()
     {
-        
+
     }
 }

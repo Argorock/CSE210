@@ -1,6 +1,6 @@
 class Encryption : PasswordService
 {
-public string Encrypt(string _saltedPassword)
+public void Encrypt(string _saltedPassword, string _encrypted)
     {
         string charSet;
         if (_count == 0)
@@ -12,7 +12,7 @@ public string Encrypt(string _saltedPassword)
             charSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*()-_=+[]{}|;:,.<>?/~";
         }
         int charSetLen = charSet.Length;
-        _encrypted = "";
+        string encryptedPassword = "";
         int currentShift = _initialShift;
         int secondaryCurrentShift = _secondaryShift;
 
@@ -36,14 +36,14 @@ public string Encrypt(string _saltedPassword)
                 currentShift += 1;
                 int charIndex = charSet.IndexOf(character);
                 int shiftedIndex = (charIndex + shiftAmount) % charSetLen;
-                _encrypted += charSet[shiftedIndex];
+                encryptedPassword += charSet[shiftedIndex];
             }
             else
             {
-                _encrypted += character;
+                encryptedPassword += character;
             }
         }
-        return _encrypted;
+        _encrypted = encryptedPassword;
     }
 // char_set_length = len(char_set)
 //     encrypted_password = ""

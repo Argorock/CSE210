@@ -1,6 +1,6 @@
 class Decryption : PasswordService 
 {
-    public string Decrypt(string _encrypted)
+    public void Decrypt(string _encrypted, string _plainText)
 {
     string charSet;
     if (_count == 0)
@@ -12,7 +12,7 @@ class Decryption : PasswordService
         charSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*()-_=+[]{}|;:,.<>?/~";
     }
     int charSetLen = charSet.Length;
-    _decryptedPassword = "";
+    string decryptedPassword = "";
     int currentShift = _initialShift;
     int secondaryCurrentShift = _secondaryShift;
 
@@ -39,7 +39,7 @@ class Decryption : PasswordService
             
             int charIndex = charSet.IndexOf(character);
             int shiftedIndex = (charIndex - shiftAmount + charSetLen) % charSetLen; // Ensure positive index
-            _decryptedPassword += charSet[shiftedIndex];
+            decryptedPassword += charSet[shiftedIndex];
 
             
             currentShift += 1;
@@ -47,9 +47,9 @@ class Decryption : PasswordService
         else
         {
             
-            _decryptedPassword += character;
+            decryptedPassword += character;
         }
     }
-    return _decryptedPassword;
+    _plainText = decryptedPassword;
 }
 }
