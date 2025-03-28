@@ -13,6 +13,7 @@ class Salt
             '[', ']', '_', '{', '|', '}', '~'];
     protected string _saltedPassword;
     protected int _interval;
+    protected int _saltLength;
 
     public Salt(string saltedPassword, int interval)
     {
@@ -23,31 +24,36 @@ class Salt
         public int RandomInterval()
     {
         Random random = new Random();
-        int interval = random.Next(1, 3);
-        return interval;
+        return random.Next(1, 3);
+    }
+
+    public int RandomSaltLength()
+    {
+        Random random = new Random();
+        _saltLength = random.Next(3, 8);
+        return _saltLength;
     }
 
     public string CreateSalt()
     {
         string salt = "";
+        int saltLength = RandomSaltLength();
         Random random = new Random();
-        for (int i= 0; i < 3; i++)
+        for (int i= 0; i < saltLength; i++)
         {
-            int characterPicker = random.Next(1, 11);
-            char character;
-            if (characterPicker <= 6)
+            int charType = random.Next(3); 
+            switch (charType)
             {
-                character = letters[random.Next(letters.Count)];
+                case 0:
+                    salt += letters[random.Next(letters.Count)];
+                    break;
+                case 1:
+                    salt += numbers[random.Next(numbers.Count)];
+                    break;
+                case 2:
+                    salt += specialCharacters[random.Next(specialCharacters.Count)];
+                    break;
             }
-            else if (characterPicker == 7 || characterPicker == 8)
-            {
-                character = numbers[random.Next(numbers.Count)];
-            }
-            else
-            {
-                character = specialCharacters[random.Next(specialCharacters.Count)];
-            }
-            salt = character + salt;
         }
         return salt;
     }

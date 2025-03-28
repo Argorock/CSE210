@@ -18,6 +18,8 @@ class Program
         Console.WriteLine("Salted Password: " + saltedPassword);
         System.Console.WriteLine("Desalted Password: " + dealtedPassword);
 
+        Console.WriteLine("Salt Length: " + salt.RandomSaltLength());
+
     
 
     }
