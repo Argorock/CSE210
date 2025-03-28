@@ -1,4 +1,4 @@
-class Salt 
+class Salt : PasswordService
 {
     private List<char> letters =
             ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',

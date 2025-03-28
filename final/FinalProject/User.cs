@@ -13,9 +13,15 @@ class User
         return _username;
     }
 
-    public void AddPassword(Password password)
+    public void AddPassword()
     {
+        System.Console.Write("Please enter your Password: ");
+        string plainText = Console.ReadLine();
+        Salt salt = new Salt("", 3);
+        string saltedPassword = salt.AddSalt(plainText);
+        Password password = new Password(plainText, saltedPassword, "metaData");
         passwords.Add(password);
+
     }
     public void RemovePassword(Password password)
     {
