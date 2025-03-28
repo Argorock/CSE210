@@ -52,7 +52,7 @@ class User
         string saltedPassword = salt.AddSalt(generatedPassword);
 
 
-        Password password = new Password(generatedPassword, saltedPassword, $"SaltLength:{salt.GetSaltLength()}, Interval:{salt.RandomInterval()}");
+        Password password = new Password(generatedPassword, saltedPassword, "metadata");
 
         passwords.Add(password);
 
@@ -73,7 +73,7 @@ class User
         string encryptedPassword = encryption.Encrypt(saltedPassword);
 
 
-        Password password = new Password(plainText, encryptedPassword, $"SaltLength:{salt.GetSaltLength()}, Interval:{salt.RandomInterval()}");
+        Password password = new Password(plainText, encryptedPassword, "metadata");
 
 
         passwords.Add(password);
