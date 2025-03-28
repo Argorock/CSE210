@@ -19,6 +19,7 @@ class Salt
     {
         _saltedPassword = saltedPassword;
         _interval = interval;
+        _saltLength = RandomSaltLength();
     }
 
         public int RandomInterval()
@@ -37,9 +38,8 @@ class Salt
     public string CreateSalt()
     {
         string salt = "";
-        int saltLength = RandomSaltLength();
         Random random = new Random();
-        for (int i= 0; i < saltLength; i++)
+        for (int i= 0; i < _saltLength; i++)
         {
             int charType = random.Next(3); 
             switch (charType)
@@ -90,13 +90,11 @@ class Salt
 
         while (currentIndex < saltedPassword.Length)
         {
-            // Extract a chunk of the plain text
             int chunkLength = Math.Min(_interval, saltedPassword.Length - currentIndex);
             string chunk = saltedPassword.Substring(currentIndex, chunkLength);
             desaltedPassword += chunk;
 
-            // Move past the chunk and the salt (4 characters of salt)
-            currentIndex += chunkLength + 3; // 4 is the length of the salt
+            currentIndex += chunkLength + _saltLength;
         }
 
         return desaltedPassword;
