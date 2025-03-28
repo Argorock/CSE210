@@ -69,32 +69,33 @@ class User
         string saltedPassword = salt.AddSalt(plainText);
 
 
-        Encryption encryption = new Encryption();
-        string encryptedPassword = encryption.Encrypt(saltedPassword);
+        // Encryption encryption = new Encryption();
+        // string encryptedPassword = encryption.Encrypt(saltedPassword);
 
 
-        Password password = new Password(plainText, encryptedPassword, "metadata");
+        // Password password = new Password(plainText, encryptedPassword, "metadata");
 
 
-        passwords.Add(password);
+        // passwords.Add(password);
+        System.Console.WriteLine($"Salted Password: {saltedPassword}");
 
         Console.WriteLine("Password encrypted and added successfully!");
     }
 
     private void DecryptPassword()
     {
-        Console.Write("Enter the encrypted password to decrypt: ");
-        string encryptedPassword = Console.ReadLine();
+        // Console.Write("Enter the encrypted password to decrypt: ");
+        // string encryptedPassword = Console.ReadLine();
 
 
-        Decryption decryption = new Decryption();
-        string saltedPassword = decryption.Decrypt(encryptedPassword);
+        // Decryption decryption = new Decryption();
+        // string saltedPassword = decryption.Decrypt(encryptedPassword);
 
 
-        Salt salt = new Salt("", 3); 
-        string plainText = salt.RemoveSalt(saltedPassword);
+        // Salt salt = new Salt("", 3); 
+        // string plainText = salt.RemoveSalt(saltedPassword);
 
-        Console.WriteLine("Decrypted password: " + plainText);
+        // Console.WriteLine("Decrypted password: " + plainText);
     }
 
     public void RemovePassword(Password password)

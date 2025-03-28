@@ -17,10 +17,5 @@ class CreatePassword : PasswordService
     public override void PasswordServices()
     {
 
-    } 
-
-    public string GenerateMetaData()
-    {
-        return "";
     }
 }
