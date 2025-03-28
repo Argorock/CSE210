@@ -8,12 +8,11 @@ class Program
 
         Salt salt = new Salt("", 3);
         string plainText = "password123";
-        int interval = 3;
 
-        salt.AddSalt(plainText, interval);
+        salt.AddSalt(plainText);
 
-        string saltedPassword = salt.AddSalt(plainText, interval);
-        string dealtedPassword = salt.RemoveSalt(saltedPassword, interval);
+        string saltedPassword = salt.AddSalt(plainText); // need to get the _interval variable here
+        string dealtedPassword = salt.RemoveSalt(saltedPassword);
 
         Console.WriteLine("Plain Text: " + plainText);
         Console.WriteLine("Salted Password: " + saltedPassword);
