@@ -1,16 +1,14 @@
 class Decryption : PasswordService 
 {
-    public void Decrypt(string _encrypted, string _plainText)
+    private string _encrypted;
+    public Decryption(string encrypted, int initialShift, int secondaryShift) : base()
+    {
+        _encrypted = encrypted;
+        _initialShift = initialShift;
+        _secondaryShift = secondaryShift;
+    }
+    public string Decrypt()
 {
-    string charSet;
-    if (_count == 0)
-    {
-        charSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*()-_=+[]{}|;:.<>?/~";
-    }
-    else
-    {
-        charSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*()-_=+[]{}|;:,.<>?/~";
-    }
     int charSetLen = charSet.Length;
     string decryptedPassword = "";
     int currentShift = _initialShift;
@@ -50,6 +48,26 @@ class Decryption : PasswordService
             decryptedPassword += character;
         }
     }
-    _plainText = decryptedPassword;
+    return decryptedPassword;
+}
+public string MultiStageDecrypt(string encryptedpassword, string metaData)
+{
+    _encrypted = encryptedpassword;
+    string metadataPassword = Decrypt();
+    // System.Console.WriteLine($"Meta Data Password: {metadataPassword}");
+    string stage2 = new MetaData(0, 0).RemoveMetaData(metadataPassword, out metaData);
+    string[] metaparts = metaData.Trim('`').Split(',');
+    int interval = int.Parse(metaparts[0]);
+    int saltLength = int.Parse(metaparts[1]);
+
+    // System.Console.WriteLine($"Stage2: {stage2}");
+    _encrypted = stage2;
+    string saltedPassword = Decrypt();
+    // System.Console.WriteLine($"Salted Password: {saltedPassword}");
+    string desaltedpassword = new Salt("", 0).RemoveSalt(saltedPassword, interval, saltLength);
+    // System.Console.WriteLine($"desalted password: {desaltedpassword}");
+    _encrypted = desaltedpassword;
+    string stage3 = Decrypt();
+    return stage3;
 }
 }

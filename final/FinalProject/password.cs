@@ -3,23 +3,22 @@ using System.Runtime.InteropServices;
 
 class Password
 {
-    protected string _plainText;
+    private string _username;
     private string _encrypted;
-    private string _metaData;
+    private string _place;
 
 
-    public Password(string plainText, string encrypted, string metaData)
+
+    public Password(string place, string username, string encrypted)
     {
-        _plainText = plainText;
         _encrypted = encrypted;
-        _metaData = metaData;
+        _username = username;
+        _place = place;
+
     }
 
     public string Display()
     {
-        return "Encrypted: " + _encrypted + "\n" +
-               "Plain Text: " + _plainText + "\n" +
-               "Meta Data: " + _metaData;
-    }
+    return $"Place: {_place}, Username: {_username}, Encrypted Password: {_encrypted}";    }
 }
 

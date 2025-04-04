@@ -2,7 +2,7 @@ class CreatePassword : PasswordService
 {
     public static string GeneratePassword(int length)
     {
-        const string validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()";
+        const string validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*()-_=+[]{}|;:,.<>?/~";
         Random random = new Random();
         char[] passwordChars = new char[length];
 
@@ -12,10 +12,5 @@ class CreatePassword : PasswordService
         }
 
         return new string(passwordChars);
-    }
-
-    public override void PasswordServices()
-    {
-
     }
 } 

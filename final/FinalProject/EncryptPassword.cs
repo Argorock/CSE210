@@ -1,26 +1,25 @@
 class Encryption : PasswordService
 {
-public void Encrypt(string _saltedPassword, string _encrypted)
+    private string _plainText;
+
+public Encryption(string plainText, int initialShift, int secondaryShift) : base()
+{
+        _plainText = plainText;
+        _initialShift = initialShift;
+        _secondaryShift = secondaryShift;
+}
+public string Encrypt()
     {
-        string charSet;
-        if (_count == 0)
-        {
-            charSet ="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*()-_=+[]{}|;:.<>?/~";
-        }
-        else
-        {
-            charSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*()-_=+[]{}|;:,.<>?/~";
-        }
         int charSetLen = charSet.Length;
         string encryptedPassword = "";
         int currentShift = _initialShift;
         int secondaryCurrentShift = _secondaryShift;
 
-        int position = _saltedPassword.Length / _positionDivider;
+        int position = _plainText.Length / _positionDivider;
         
-        for (int i = 0; i < _saltedPassword.Length; i++)
+        for (int i = 0; i < _plainText.Length; i++)
         {
-            char character = _saltedPassword[i];
+            char character = _plainText[i];
             if (charSet.Contains(character))
             {
                 int shiftAmount;
@@ -43,6 +42,25 @@ public void Encrypt(string _saltedPassword, string _encrypted)
                 encryptedPassword += character;
             }
         }
-        _encrypted = encryptedPassword;
+        return encryptedPassword;
     }
+public string MultiStageEncrypt(string password)
+{
+    _plainText = password;
+    string stage1 = Encrypt();
+    // System.Console.WriteLine($"stage1: {stage1}");
+    Salt saltHandler = new Salt(stage1, 1);
+    string saltedPassword=saltHandler.AddSalt(stage1, out int interval, out int saltLength);
+    // System.Console.WriteLine($"Salted Password: {saltedPassword}");
+    MetaData metaDataHandler = new MetaData(interval, saltLength);
+    string metaData = metaDataHandler.SaveMetaData();
+    // System.Console.WriteLine($"Meta Data: {metaData}");
+    _plainText = saltedPassword;
+    string stage2 = Encrypt();
+    // System.Console.WriteLine($"Stage2: {stage2}");
+    string metadataPassword = stage2 + metaData;
+    _plainText = metadataPassword;
+    string stage3 = Encrypt();
+    return stage3;
+}
 }

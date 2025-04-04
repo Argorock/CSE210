@@ -1,30 +1,35 @@
 class MetaData
 {
-    private string _password;
     private int _saltInterval;
     private int _saltLength;
     private string _username;
 
-    public MetaData(string password, int saltInterval, int saltLength, string username)
+    public MetaData(int saltInterval, int saltLength)
     {
-        _password = password;
+
         _saltInterval = saltInterval;
         _saltLength = saltLength;
-        _username = username;
+        // _username = username;
     }
 
 
 
-    public string SaveData()
+    public string SaveMetaData()
     {
-        string metaData = $"Password: {_password}, Salt Interval: {_saltInterval}, Salt Length: {_saltLength}, Username: {_username}";
+        string metaData = $"`{_saltInterval},{_saltLength}";
         return metaData;
     }
-    public void GetData(string password, int saltInterval, int saltLength, string username)
+
+    public string RemoveMetaData(string input, out string metaData)
     {
-        _password = password;
-        _saltInterval = saltInterval;
-        _saltLength = saltLength;
-        _username = username;
+        int metaDataStartIndex = input.IndexOf('`');
+    
+    if (metaDataStartIndex != -1)
+    {
+        metaData = input.Substring(metaDataStartIndex);
+        return input.Substring(0, metaDataStartIndex);
+    }
+    metaData = "";
+    return input;
     }
 }

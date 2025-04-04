@@ -57,9 +57,13 @@ class Salt : PasswordService
         }
         return salt;
     }
-    public string AddSalt(string plainText)
+    public string AddSalt(string plainText, out int interval, out int saltLength)
     {
         _interval = RandomInterval();
+        _saltLength = RandomSaltLength();
+        interval = _interval;
+        saltLength = _saltLength;
+
         string saltedPassword = "";
         int currentIndex = 0;
 
@@ -83,18 +87,18 @@ class Salt : PasswordService
     
     }
 
-    public string RemoveSalt(string saltedPassword)
+    public string RemoveSalt(string saltedPassword, int interval, int saltLength)
     {
         string desaltedPassword = "";
         int currentIndex = 0;
 
         while (currentIndex < saltedPassword.Length)
         {
-            int chunkLength = Math.Min(_interval, saltedPassword.Length - currentIndex);
+            int chunkLength = Math.Min(interval, saltedPassword.Length - currentIndex);
             string chunk = saltedPassword.Substring(currentIndex, chunkLength);
             desaltedPassword += chunk;
 
-            currentIndex += chunkLength + _saltLength;
+            currentIndex += chunkLength + saltLength;
         }
 
         return desaltedPassword;
