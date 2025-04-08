@@ -11,6 +11,7 @@ class Salt : PasswordService
             ['!', '#', '$', '%', '&', '(', ')', '*', '+',
             '-', '.', '/', ':', ';', '<', '=', '>', '?', '@',
             '[', ']', '_', '{', '|', '}', '~'];
+            
     protected string _saltedPassword;
     protected int _interval;
     protected int _saltLength;

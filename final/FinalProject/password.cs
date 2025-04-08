@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 
 class Password
 {
+
     private string _username;
     private string _encrypted;
     private string _place;
@@ -17,8 +18,15 @@ class Password
 
     }
 
-    public string Display()
+    public string GetPasswordDetails()
     {
-    return $"Place: {_place}, Username: {_username}, Encrypted Password: {_encrypted}";    }
+    return $"{_place}:{_username}:{_encrypted}";
+    }
+
+    public bool MatchesPlace(string place)
+{
+    return _place.Equals(place, StringComparison.OrdinalIgnoreCase);
+}
+
 }
 

@@ -50,13 +50,18 @@ class Decryption : PasswordService
     }
     return decryptedPassword;
 }
-public string MultiStageDecrypt(string encryptedpassword, string metaData)
+public string MultiStageDecrypt(string encryptedPassword, string metaData)
 {
-    _encrypted = encryptedpassword;
+
+    _encrypted = encryptedPassword;
     string metadataPassword = Decrypt();
     // System.Console.WriteLine($"Meta Data Password: {metadataPassword}");
     string stage2 = new MetaData(0, 0).RemoveMetaData(metadataPassword, out metaData);
+
     string[] metaparts = metaData.Trim('`').Split(',');
+    // Console.WriteLine($"Extracted metadata: {metaData}");
+    // System.Console.WriteLine(metaparts[0]);
+    // System.Console.WriteLine(metaparts[1]);
     int interval = int.Parse(metaparts[0]);
     int saltLength = int.Parse(metaparts[1]);
 

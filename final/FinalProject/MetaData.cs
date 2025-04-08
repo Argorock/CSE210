@@ -2,14 +2,11 @@ class MetaData
 {
     private int _saltInterval;
     private int _saltLength;
-    private string _username;
-
     public MetaData(int saltInterval, int saltLength)
     {
 
         _saltInterval = saltInterval;
         _saltLength = saltLength;
-        // _username = username;
     }
 
 
